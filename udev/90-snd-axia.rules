@@ -1,4 +1,11 @@
 # udev rules for the Axia ALSA audio/network driver (snd-axia kernel module)
+#
+# The rules can be tested with the following commands:
+# udevadm test -a add /sys/module/snd_axia
+# udevadm test -a remove /sys/module/snd_axia
+#
+# Please submit enhancements, bugfixes or comments via:
+# https://github.com/radiorabe/systemd-axia-alsa
 
 # Create the necessary /dev/axia0 device node and tag it as a systemd device
 ACTION=="add", DEVPATH=="/module/snd-axia", TAG+="systemd", IMPORT{program}+="snd-axia.sh --env" RUN{program}+="snd-axia.sh --mknod"
