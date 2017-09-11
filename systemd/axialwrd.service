@@ -1,0 +1,27 @@
+[Unit]
+Description=Axia Livewire Routing Daemon
+Documentation=man:lwr.conf(5) https://www.telosalliance.com/Axia/Livewire-AoIP-Networking
+After=sys-module-snd_axia.device
+Wants=network-online.target
+Requires=sys-module-snd_axia.device
+
+ConditionPathExists=/etc/axia/lwr.conf
+ConditionPathExists=/etc/axia/lwcap.conf
+ConditionPathExists=/etc/axia/license
+
+[Service]
+Type=forking
+PIDFile=/var/run/axialwrd.pid
+
+# Let's harden the environment, as axialwrd has to be run as root
+ProtectSystem=true
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+
+EnvironmentFile=/etc/axia/systemd-env.conf
+ExecStart=/usr/sbin/axialwrd $AXIALWRD_OPTS
+
+[Install]
+WantedBy=multi-user.target

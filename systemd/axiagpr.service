@@ -1,0 +1,25 @@
+[Unit]
+Description=Axia GPIO Bridge for Livewire/Control Surface control
+Documentation=https://www.telosalliance.com/Axia/Livewire-AoIP-Networking
+Wants=network-online.target
+
+[Service]
+Type=forking
+PIDFile=/var/run/axiagpr.pid
+
+User=axia
+Group=axia
+
+EnvironmentFile=/etc/axia/systemd-env.conf
+
+# The daemon doesn't have an option for specifying an alternative PID file path.
+# Therefore, the PID needs to be created in advance, as it can't be moved to a
+# daemon owned run-directory.
+PermissionsStartOnly=true
+ExecStartPre=/usr/bin/touch /var/run/axiagpr.pid
+ExecStartPre=/usr/bin/chown axia:axia /var/run/axiagpr.pid
+
+ExecStart=/usr/sbin/axiagpr $AXIAGPR_OPTS
+
+[Install]
+WantedBy=multi-user.target

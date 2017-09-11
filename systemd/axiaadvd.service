@@ -1,0 +1,26 @@
+[Unit]
+Description=Axia Advertising Daemon
+Documentation=https://www.telosalliance.com/Axia/Livewire-AoIP-Networking
+Wants=network-online.target axialwrd.service
+After=axialwrd.service
+
+[Service]
+Type=forking
+PIDFile=/var/run/axiaadvd.pid
+
+User=axia
+Group=axia
+
+EnvironmentFile=/etc/axia/systemd-env.conf
+
+# The daemon doesn't have an option for specifying an alternative PID and sac
+# file path. Therefore, the PID and sac needs to be created in advance, as it
+# can't be moved to a daemon owned run-directory.
+PermissionsStartOnly=true
+ExecStartPre=/usr/bin/touch /var/run/axiaadvd.pid /var/run/sac
+ExecStartPre=/usr/bin/chown axia:axia /var/run/axiaadvd.pid /var/run/sac
+
+ExecStart=/usr/sbin/axiaadvd $AXIAADVD_OPTS
+
+[Install]
+WantedBy=multi-user.target
