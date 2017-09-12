@@ -47,7 +47,19 @@ To install the files manually, use the provided [`Makefile`](Makefile) and set
 the prefix to `/` (which will install the files directly into the root of your
 system):
 ```bash
+# Install all files
 make prefix=/ install
+
+# Create the axia service user and group
+userName='axia'
+
+useradd --comment "${userName} system user account" \
+        --home-dir /dev/null \
+        --no-create-home \
+        --system \
+        --shell /sbin/nologin \
+        --user-group \
+        "${userName}"
 ```
 
 Afterwards, reboot your system or manually load the kernel module (`modprobe
