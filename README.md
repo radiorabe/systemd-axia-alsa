@@ -14,14 +14,16 @@ RPM](http://download.paravelsystems.com/CentOS/7com/CentOS/) provides a
 SysV-style init script (`axiad`) and an auto-generated systemd service unit
 wrapper (`axiad.service`). Apart from being only a wrapper around the
 SysV-style init script, everything is bundled into one script (module loading,
-device node creation and the start of the three daemons), furthermore
-the daemons will all be started with _root_ privileges.
+device node creation and the start of the three daemons). Furthermore
+the daemons will all be started with _root_ privileges and the startup options
+are hard coded into the init script.
 
 These were the reasons and main motivations for re-creating the service start
 up in a more modern and flexible fashion.
              
 ## Features
-* Dedicated systemd services (no SysV wrapper)
+* Dedicated systemd services (no SysV wrapper) with configurable startup
+  options.
 * One systemd service unit per service
   * [`axialwrd.service`](systemd/axialwrd.service) - Axia Livewire Routing
     Daemon
@@ -49,6 +51,8 @@ Systemd service units:
   * [`axiaadvd.service`](systemd/axiaadvd.service) - Axia Advertising Daemon
   * [`axiagpr.service`](systemd/axiagpr.service) - Axia GPIO Bridge for
     Livewire/Control Surface control
+2. Install [`systemd-env.conf`](systemd/systemd-env.conf) into the `/etc/axia`
+   directory.
 
 udev rule and helper script:
 1. Install [`90-snd-axia.rules`](udev/90-snd-axia.rules) into the
@@ -160,10 +164,11 @@ journalctl -u axiagpr.service -f
 
 ### Axia daemons startup options
 The startup options for all three Axia daemons can be changed within the
-systemd environment file located at `/etc/axia/systemd-env.conf`. Refer to the
-daemon's respective `--help` output for a list of supported startup options and
-remember to restart the respective system service unit after making a change to
-this file.
+[systemd environment
+file](https://www.freedesktop.org/software/systemd/man/systemd.exec.html#EnvironmentFile=)
+located at `/etc/axia/systemd-env.conf`. Refer to the daemon's respective
+`--help` output for a list of supported startup options and remember to restart
+the respective system service unit after making a change to this file.
 
 The following example startup configuration, instructs `axialwrd` and `axiaadvd`to use  the `eth1` network interface rather than the default of `eth0`:
 ```
