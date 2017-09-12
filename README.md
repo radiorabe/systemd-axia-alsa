@@ -63,7 +63,7 @@ useradd --comment "${userName} system user account" \
         --no-create-home \
         --system \
         --shell /sbin/nologin \
-        --user-group
+        --user-group \
         "${userName}"
 ```
 
