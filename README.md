@@ -88,6 +88,10 @@ ls -la /dev/axia0
 crw-r--r--. 1 root root 247, 0 Sep 11 22:09 /dev/axia0
 ```
 
+### `axia-alsa` kernel module parameters
+The `axia-alsa` kernel module parameters (such as the number of virtual
+livewire devices) can be changed within `/etc/modprobe.d/snd-axia.conf`
+
 ### systemd services
 The three Axia daemons can be managed with the following commands.
 
