@@ -1,4 +1,8 @@
 # Systemd service units for the AXIA - ALSA soundcard driver for Livewire
+systemd service units and udev rules for managing AXIA - ALSA soundcard driver
+for Livewire.
+
+## Motivation
 [Paravel Systems](http://www.paravelsystems.com/) offers an AXIA - ALSA
 Soundcard Driver for
 [Livewire](https://www.telosalliance.com/Axia/Livewire-AoIP-Networking) (also
@@ -6,7 +10,6 @@ known as _Axia IP Audio Driver for Linux_) which consists out of a Linux kernel
 module (`snd-axia`) and three related daemons (`axialwrd`, `axiaadvd` and
 `axiagpr`).
 
-## Motivation
 The [`axia-alsa` CentOS
 RPM](http://download.paravelsystems.com/CentOS/7com/CentOS/) provides a
 SysV-style init script (`axiad`) and an auto-generated systemd service unit
