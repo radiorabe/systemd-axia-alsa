@@ -46,10 +46,10 @@ up in a more modern and flexible fashion.
 Systemd service units:
 1. Install the three systemd service units into the `/etc/systemd/system`
    directory.  
-  * [`axialwrd.service`](systemd/axialwrd.service) - Axia Livewire Routing
+   * [`axialwrd.service`](systemd/axialwrd.service) - Axia Livewire Routing
     Daemon
-  * [`axiaadvd.service`](systemd/axiaadvd.service) - Axia Advertising Daemon
-  * [`axiagpr.service`](systemd/axiagpr.service) - Axia GPIO Bridge for
+   * [`axiaadvd.service`](systemd/axiaadvd.service) - Axia Advertising Daemon
+   * [`axiagpr.service`](systemd/axiagpr.service) - Axia GPIO Bridge for
     Livewire/Control Surface control
 2. Install [`systemd-env.conf`](systemd/systemd-env.conf) into the `/etc/axia`
    directory.
