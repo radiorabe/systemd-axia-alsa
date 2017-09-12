@@ -41,22 +41,24 @@ up in a more modern and flexible fashion.
 @TODO
 
 ### Manuall installation
-1. Systemd service units
-  1. Install the three systemd service units into the `/etc/systemd/system`
-     directory.
-    * [`axialwrd.service`](systemd/axialwrd.service) - Axia Livewire Routing
-      Daemon
-    * [`axiaadvd.service`](systemd/axiaadvd.service) - Axia Advertising Daemon
-    * [`axiagpr.service`](systemd/axiagpr.service) - Axia GPIO Bridge for
-      Livewire/Control Surface control
-2. udev rule and helper script
-  1. Install [`90-snd-axia.rules`](udev/90-snd-axia.rules) into the
-     `/etc/udev/rules.d` directory.
-  2. Install [`snd-axia.sh`](udev/snd-axia.sh) into the `/usr/lib/udev`
-     directory.
-3. Kernel module loading
-  1. Install [`snd-axia.conf`](modules-load.d/snd-axia.conf) into the
-     `/etc/modules-load.d/` directory.
-  2. Install [`snd-axia.conf`](modprobe.d/snd-axia.conf) into the
-     `/etc/modprobe.d` directory.
-4. Reboot or manually load the kernel module (`modprobe snd-axia`)
+Systemd service units:
+1. Install the three systemd service units into the `/etc/systemd/system` directory.
+  * [`axialwrd.service`](systemd/axialwrd.service) - Axia Livewire Routing
+    Daemon
+  * [`axiaadvd.service`](systemd/axiaadvd.service) - Axia Advertising Daemon
+  * [`axiagpr.service`](systemd/axiagpr.service) - Axia GPIO Bridge for
+    Livewire/Control Surface control
+
+udev rule and helper script:
+1. Install [`90-snd-axia.rules`](udev/90-snd-axia.rules) into the
+   `/etc/udev/rules.d` directory.
+2. Install [`snd-axia.sh`](udev/snd-axia.sh) into the `/usr/lib/udev`
+   directory.
+
+Kernel module loading:
+1. Install [`snd-axia.conf`](modules-load.d/snd-axia.conf) into the
+   `/etc/modules-load.d/` directory.
+2. Install [`snd-axia.conf`](modprobe.d/snd-axia.conf) into the
+   `/etc/modprobe.d` directory.
+
+Reboot or manually load the kernel module (`modprobe snd-axia`)
