@@ -53,17 +53,18 @@ Systemd service units:
     Livewire/Control Surface control
 2. Install [`systemd-env.conf`](systemd/systemd-env.conf) into the `/etc/axia`
    directory.
-3. Create the `axia` service user and group
-   ```bash
-   userName='axia'
 
-   useradd --comment "${userName} system user account" \
-           --home-dir /dev/null \
-           --no-create-home \
-           --system \
-           --shell /sbin/nologin \
-           --user-group
-           "${userName}"
+Create the `axia` service user and group:
+```bash
+userName='axia'
+
+useradd --comment "${userName} system user account" \
+        --home-dir /dev/null \
+        --no-create-home \
+        --system \
+        --shell /sbin/nologin \
+        --user-group
+        "${userName}"
 ```
 
 udev rule and helper script:
