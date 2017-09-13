@@ -60,15 +60,31 @@ useradd --comment "${userName} system user account" \
         --shell /sbin/nologin \
         --user-group \
         "${userName}"
+
+
+# Import the Paravel-Broadcast GPG key
+rpm --import \
+    http://download.paravelsystems.com/CentOS/7com/RPM-GPG-KEY-Paravel-Broadcast
+
+# Install the Paravel-Commercial repository configuration
+curl -o /etc/yum.repos.d/Paravel-Commercial.repo \
+    http://download.paravelsystems.com/CentOS/7com/Paravel-Commercial.repo
+
+# Install the required axia-alsa packages
+yum install axia-alsa axia-alsa-cli kmod-axia-alsa 
+
+
+# Register your license
+lwlicense <SERIAL-NUMBER>
 ```
 
 Afterwards, reboot your system or manually load the kernel module (`modprobe
-snd-axia`)
+snd-axia`), then follow the [Usage](#usage) section.
 
 ## Usage
 ### Kernel module and device node
 The `axia-alsa` kernel module and its related `/dev/axia0` device node should
-be automatically loaded and created upon boot. You can check that with
+be automatically loaded and created upon boot. You can check that with the
 following commands.
 
 Check that the module was loaded:
