@@ -138,14 +138,14 @@ ls -la /dev/axia0
 crw-r--r--. 1 root root 247, 0 Sep 11 22:09 /dev/axia0
 ```
 
-### `axia-alsa` kernel module parameters
+### Kernel module parameters
 The `axia-alsa` kernel module parameters (such as the number of virtual
 livewire devices) can be changed within `/etc/modprobe.d/snd-axia.conf`
 
 ### systemd services
 The three Axia daemons can be managed with the following commands.
 
-`axialwrd` - Axia Livewire Routing Daemon:
+#### Axia Livewire Routing Daemon (`axialwrd`)
 ```bash
 # Start the axialwrd service
 systemctl start axialwrd.service
@@ -166,7 +166,7 @@ journalctl -u axialwrd.service
 journalctl -u axialwrd.service -f
 ```
 
-`axiaadvd` - Axia Advertising Daemon:
+#### Axia Advertising Daemon (`axiaadvd`)
 ```bash
 # Start the axiaadvd service
 systemctl start axiaadvd.service
@@ -187,7 +187,7 @@ journalctl -u axiaadvd.service
 journalctl -u axiaadvd.service -f
 ```
 
-`axiagpr` - Axia GPIO Bridge for Livewire/Control Surface control:
+#### Axia GPIO Bridge for Livewire/Control Surface control (`axiagpr`)
 ```bash
 # Start the axiagpr service
 systemctl start axiagpr.service
