@@ -39,10 +39,38 @@ up in a more modern and flexible fashion.
 * Minimization of `root` privileges
 
 ## Installation
-### RPM installation
-@TODO
+### RPM installation on CentOS
+The systemd service units and udev rules are packaged for CentOS 7 and are
+available on [Radio RaBe's Audio Packages for Enterprise Linux
+repository](https://build.opensuse.org/project/show/home:radiorabe:audio). They
+can be installed as follows:
 
-### Manual installation
+```bash
+# Install the RaBe APEL repository configuration
+curl -o /etc/yum.repos.d/home:radiorabe:audio.repo \
+     http://download.opensuse.org/repositories/home:/radiorabe:/audio/CentOS_7/home:radiorabe:audio.repo
+
+
+# Import the Paravel-Broadcast GPG key
+rpm --import \
+    http://download.paravelsystems.com/CentOS/7com/RPM-GPG-KEY-Paravel-Broadcast
+
+# Install the Paravel-Commercial repository configuration
+curl -o /etc/yum.repos.d/Paravel-Commercial.repo \
+    http://download.paravelsystems.com/CentOS/7com/Paravel-Commercial.repo
+
+
+# Install the required packages (axia-alsa-cli contains the lwlicense command)
+yum install systemd-axia-alsa axia-alsa-cli
+
+# Register your license
+lwlicense <SERIAL-NUMBER>
+```
+
+Afterwards, reboot your system or manually load the kernel module (`modprobe
+snd-axia`), then follow the [Usage](#usage) section.
+
+### Manual installation on CentOS
 To install the files manually, use the provided [`Makefile`](Makefile) and set
 the prefix to `/` (which will install the files directly into the root of your
 system):
