@@ -8,7 +8,7 @@
 # https://github.com/radiorabe/systemd-axia-alsa
 
 # Create the necessary /dev/axia0 device node and tag it as a systemd device
-ACTION=="add", DEVPATH=="/module/snd-axia", TAG+="systemd", IMPORT{program}+="snd-axia.sh --env" RUN{program}+="snd-axia.sh --mknod"
+ACTION=="add", DEVPATH=="/module/snd_axia", TAG+="systemd", IMPORT{program}+="snd-axia.sh --env" RUN{program}+="snd-axia.sh --mknod"
 
 # Remove an existing /dev/axia0 device node
-ACTION=="remove", DEVPATH=="/module/snd-axia", RUN{program}+="snd-axia.sh --rmnod"
+ACTION=="remove", DEVPATH=="/module/snd_axia", RUN{program}+="snd-axia.sh --rmnod"
