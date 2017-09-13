@@ -39,6 +39,11 @@ up in a more modern and flexible fashion.
 * Minimization of `root` privileges
 
 ## Installation
+For the installation you need a valid serial number for the _Axia IP-Audio
+Driver for Linux_ from [Paravel
+Systems](http://www.paravelsystems.com/contact-us/).
+
+
 ### RPM installation on CentOS
 The systemd service units and udev rules are packaged for CentOS 7 and are
 available on [Radio RaBe's Audio Packages for Enterprise Linux
