@@ -23,7 +23,7 @@
 #
 
 Name:           systemd-axia-alsa
-Version:        0.1.0
+Version:        0.1.1
 Release:        1%{?dist}
 Summary:        systemd service units and udev rules for AXIA - ALSA
 
@@ -87,5 +87,5 @@ exit 0
 
 
 %changelog
-* Tue Sep 12 2017 Christian Affolter <c.affolter@purplehaze.ch> - 0.1.0-1
+* Tue Sep 12 2017 Christian Affolter <c.affolter@purplehaze.ch> - 0.1.1-1
 - Initial release
