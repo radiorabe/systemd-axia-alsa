@@ -23,7 +23,7 @@
 #
 
 Name:           systemd-axia-alsa
-Version:        0.1.1
+Version:        0.2.0
 Release:        1%{?dist}
 Summary:        systemd service units and udev rules for AXIA - ALSA
 
@@ -77,6 +77,24 @@ getent passwd %{service_user} >/dev/null || \
 exit 0
 
 
+%post
+%systemd_post axiagpr.service
+%systemd_post axiaadvd.service
+%systemd_post axialwrd.service
+
+
+%preun
+%systemd_preun axiagpr.service
+%systemd_preun axiaadvd.service
+%systemd_preun axialwrd.service
+
+
+%postun
+%systemd_postun_with_restart axiagpr.service
+%systemd_postun_with_restart axiaadvd.service
+%systemd_postun_with_restart axialwrd.service
+
+
 %files
 %doc %{_docdir}/%{name}/README.md
 %{_unitdir}/*.service
@@ -87,5 +105,5 @@ exit 0
 
 
 %changelog
-* Tue Sep 12 2017 Christian Affolter <c.affolter@purplehaze.ch> - 0.1.1-1
+* Tue Sep 12 2017 Christian Affolter <c.affolter@purplehaze.ch> - 0.2.0-1
 - Initial release
