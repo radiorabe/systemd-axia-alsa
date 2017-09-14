@@ -227,3 +227,76 @@ AXIALWRD_OPTS="-i eth1"
 # supported options.
 AXIAADVD_OPTS="-if eth1"
 ```
+
+## Troubleshooting
+The following commands might help on debugging.
+
+Systemd service units status:
+```bash
+systemctl status axialwrd.service
+systemctl status axiaadvd.service
+systemctl status axiagpr.service
+systemctl status sys-module-snd_axia.device
+```
+
+Check that [the kernel module has been loaded and the device node was
+created](#kernel-module-and-device-node).
+
+udev sysfs info:
+```bash
+udevadm info /sys/module/snd_axia
+```
+```
+P: /module/snd_axia
+E: DEVNAME=/dev/axia0
+E: DEVPATH=/module/snd_axia
+E: MAJOR=247
+E: MINOR=0
+E: NAME=axia0
+E: SUBSYSTEM=module
+E: TAGS=:systemd:
+E: USEC_INITIALIZED=18014
+```
+
+udev add event test:
+```bash
+udevadm test -a add /sys/module/snd_axia
+```
+```
+[...]
+Reading rules file: /usr/lib/udev/rules.d/90-snd-axia.rules
+[...]
+IMPORT 'snd-axia.sh --env' /usr/lib/udev/rules.d/90-snd-axia.rules:11
+starting 'snd-axia.sh --env'
+'snd-axia.sh --env'(out) 'NAME=axia0'
+'snd-axia.sh --env'(out) 'MAJOR=247'
+'snd-axia.sh --env'(out) 'MINOR=0'
+'snd-axia.sh --env'(out) 'DEVNAME=/dev/axia0'
+'snd-axia.sh --env' [2793] exit with return code 0
+RUN 'snd-axia.sh --mknod' /usr/lib/udev/rules.d/90-snd-axia.rules:11
+created db file '/run/udev/data/+module:snd_axia' for '/module/snd_axia'
+ACTION=add
+DEVNAME=/dev/axia0
+DEVPATH=/module/snd_axia
+MAJOR=247
+MINOR=0
+NAME=axia0
+SUBSYSTEM=module
+TAGS=:systemd:
+USEC_INITIALIZED=18014
+run: 'snd-axia.sh --mknod'
+Unload module index
+Unloaded link configuration context.
+```
+
+udev helper script tests:
+```bash
+# Create udev env vars
+/usr/lib/udev/snd-axia.sh --env
+
+# Create the /dev/axia0 device node
+/usr/lib/udev/snd-axia.sh --mknod
+
+# Remove the /dev/axia0 device node
+/usr/lib/udev/snd-axia.sh --rmnod
+```
