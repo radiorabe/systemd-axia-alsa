@@ -18,8 +18,8 @@ device node creation and the start of the three daemons). Furthermore
 the daemons will all be started with _root_ privileges and the startup options
 are hard coded into the init script.
 
-These were the reasons and main motivations for re-creating the service start
-up in a more modern and flexible fashion.
+These were the reasons and main motivations for re-creating the start-up of the
+services in a more modern and flexible fashion.
              
 ## Features
 * Dedicated systemd services (no SysV wrapper) with configurable startup
@@ -39,9 +39,8 @@ up in a more modern and flexible fashion.
 * Minimization of `root` privileges
 
 ## Installation
-For the installation you need a valid serial number for the _Axia IP-Audio
-Driver for Linux_ from [Paravel
-Systems](http://www.paravelsystems.com/contact-us/).
+A valid serial number (license) for the _Axia IP-Audio Driver for Linux_ from
+[Paravel Systems](http://www.paravelsystems.com/contact-us/) is required.
 
 
 ### RPM installation on CentOS
