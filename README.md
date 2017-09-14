@@ -67,6 +67,9 @@ curl -o /etc/yum.repos.d/Paravel-Commercial.repo \
 # Install the required packages (axia-alsa-cli contains the lwlicense command)
 yum install systemd-axia-alsa axia-alsa-cli
 
+# Reload the systemd manager configuration
+systemctl daemon-reload
+
 # Register your license
 lwlicense <SERIAL-NUMBER>
 ```
@@ -105,6 +108,8 @@ curl -o /etc/yum.repos.d/Paravel-Commercial.repo \
 # Install the required axia-alsa packages
 yum install axia-alsa axia-alsa-cli kmod-axia-alsa 
 
+# Reload the systemd manager configuration
+systemctl daemon-reload
 
 # Register your license
 lwlicense <SERIAL-NUMBER>
