@@ -2,6 +2,7 @@
 Description=Axia GPIO Bridge for Livewire/Control Surface control
 Documentation=https://www.telosalliance.com/Axia/Livewire-AoIP-Networking
 Wants=network-online.target
+After=network-online.target
 
 [Service]
 Type=forking

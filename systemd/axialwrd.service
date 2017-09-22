@@ -1,7 +1,7 @@
 [Unit]
 Description=Axia Livewire Routing Daemon
 Documentation=man:lwr.conf(5) https://www.telosalliance.com/Axia/Livewire-AoIP-Networking
-After=sys-module-snd_axia.device
+After=sys-module-snd_axia.device network-online.target
 Wants=network-online.target
 Requires=sys-module-snd_axia.device
 
