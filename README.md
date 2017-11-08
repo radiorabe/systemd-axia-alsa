@@ -305,3 +305,11 @@ udev helper script tests:
 # Remove the /dev/axia0 device node
 /usr/lib/udev/snd-axia.sh --rmnod
 ```
+
+## License
+systemd-axia-alsa is free software: you can redistribute it and/or modify it under
+the terms of the GNU Affero General Public License as published by the Free
+Software Foundation, version 3 of the License.
+
+## Copyright
+Copyright (c) 2017 [Radio Bern RaBe](http://www.rabe.ch)
