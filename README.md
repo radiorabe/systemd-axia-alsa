@@ -37,6 +37,8 @@ services in a more modern and flexible fashion.
   [udev](https://www.freedesktop.org/software/systemd/man/udev.html) upon
   module loading
 * Minimization of `root` privileges
+* [firewalld](http://www.firewalld.org) service file (for IGMP and *Livewire
+  Routing Protocol*)
 
 ## Installation
 A valid serial number (license) for the _Axia IP-Audio Driver for Linux_ from
@@ -145,6 +147,32 @@ crw-r--r--. 1 root root 247, 0 Sep 11 22:09 /dev/axia0
 ### Kernel module parameters
 The `axia-alsa` kernel module parameters (such as the number of virtual
 livewire devices) can be changed within `/etc/modprobe.d/snd-axia.conf`
+
+### Firewall
+In case you have a local firewall active, make sure that you allow at least the
+[IGMP](https://tools.ietf.org/html/rfc2236) protocol. This is required for IGMP
+snooping to work and allows the `axialwrd` daemon to maintain multicast
+subscriptions of the audio and sync streams.
+For remote control of the audio routes via the *Livewire Routing Protocol*, the
+TCP port 93 needs to be allowed as well.
+
+If you use [firewalld](http://www.firewalld.org), the required rules can be
+added via the included [firewalld service file](firewalld/services):
+```bash
+# Replace YOUR-ZONE with your actual zone name or omit --zone= to use the
+# default zone
+firewall-cmd --permanent --zone=YOUR-ZONE --add-service=axialwrd
+firewall-cmd --reload
+```
+
+This will add the following iptables/netfiler rules:
+```
+-A IN_YOUR-ZONE_allow -p tcp -m tcp --dport 93 -m conntrack --ctstate NEW -j ACCEPT
+-A IN_YOUR-ZONE_allow -p igmp -m conntrack --ctstate NEW -j ACCEPT
+```
+
+Consider restricting access to the *Livewire Routing* port (tcp/93) to a
+specific management IP address or range.
 
 ### systemd services
 The three Axia daemons can be managed with the following commands.
@@ -305,3 +333,11 @@ udev helper script tests:
 # Remove the /dev/axia0 device node
 /usr/lib/udev/snd-axia.sh --rmnod
 ```
+
+## License
+systemd-axia-alsa is free software: you can redistribute it and/or modify it under
+the terms of the GNU Affero General Public License as published by the Free
+Software Foundation, version 3 of the License.
+
+## Copyright
+Copyright (c) 2017 [Radio Bern RaBe](http://www.rabe.ch)

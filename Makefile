@@ -60,6 +60,15 @@ user_udevrulesdir = $(user_udevdir)/rules.d
 udevdir = $(system_udevdir)
 udevrulesdir = $(user_udevrulesdir)
 
+# firewalld directories
+system_firewallddir = $(libdir)/firewalld
+system_firewalldservicesdir = $(system_firewallddir)/services
+user_firewallddir = $(sysconfdir)/firewalld
+user_firewalldservicesdir = $(user_firewallddir)/services
+firewallddir = $(user_firewallddir)
+firewalldservicesdir = $(firewallddir)/services
+
+
 # Kernel auto module loading and configuration directories 
 modulesloaddir = $(sysconfdir)/modules-load.d
 modeprobedir = $(sysconfdir)/modprobe.d
@@ -76,6 +85,7 @@ all:
 installdirs:
 	$(INSTALL) -d $(DESTDIR)$(axiaconfdir) \
                   $(DESTDIR)$(docdir) \
+                  $(DESTDIR)$(firewalldservicesdir) \
                   $(DESTDIR)$(modeprobedir) \
                   $(DESTDIR)$(modulesloaddir) \
                   $(DESTDIR)$(udevdir) \
@@ -89,6 +99,7 @@ install: all installdirs
 	$(INSTALL_DATA) systemd/systemd-env.conf  $(DESTDIR)$(axiaconfdir)/
 	$(INSTALL_PROGRAM) udev/snd-axia.sh $(DESTDIR)$(udevdir)/
 	$(INSTALL_DATA) udev/90-snd-axia.rules $(DESTDIR)$(udevrulesdir)/
+	$(INSTALL_DATA) firewalld/services/*.xml $(DESTDIR)$(firewalldservicesdir)/
 	$(INSTALL_DATA) modules-load.d/snd-axia.conf $(DESTDIR)$(modulesloaddir)/
 	$(INSTALL_DATA) modprobe.d/snd-axia.conf $(DESTDIR)$(modeprobedir)/
 	$(INSTALL_DATA) README.md $(DESTDIR)$(docdir)/
