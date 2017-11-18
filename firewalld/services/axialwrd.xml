@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<service>
+  <short>axialwrd</short>
+  <description>Axia Livewire Routing Daemon - ports and protocols are opened for the Livewire Routing Protocol (tcp/93) and for IGMP snooping to work.</description>
+  <port protocol="tcp" port="93"/>
+  <protocol value="igmp"/>
+</service>
