@@ -23,7 +23,7 @@
 #
 
 Name:           systemd-axia-alsa
-Version:        0.2.1
+Version:        0.3.0
 Release:        1%{?dist}
 Summary:        systemd service units and udev rules for AXIA - ALSA
 
@@ -36,13 +36,20 @@ Source0:        https://github.com/radiorabe/%{name}/archive/v%{version}.tar.gz#
 BuildRequires:  systemd
 
 Requires:       axia-alsa
+Requires:       firewalld-filesystem
 Requires:       kmod-axia-alsa
 
 # udev directory paths
 # The _libdir macro can't be used as a prefix here as udev rules have to go
 # into /usr/lib/udev/rules.d and not into /usr/lib64/udev/rules.d (on x86_64)
-%global udevdir /usr/lib/udev/
+%global udevdir %{_prefix}/lib/udev
 %global udevrulesdir %{udevdir}/rules.d
+
+# firewalld directory paths
+# The _libdir macro can't be used as a prefix here as firewalld files have to go
+# into /usr/lib/firewalld and not into /usr/lib64/firewalld (on x86_64)
+%global firewallddir %{_prefix}/lib/firewalld
+%global firewalldservicesdir %{firewallddir}/services
 
 %global service_user axia
 %global service_group %{service_user}
@@ -66,6 +73,7 @@ make install prefix=%{_prefix} \
              sysconfdir=%{_sysconfdir} \
              unitdir=%{_unitdir} \
              udevrulesdir=%{udevrulesdir} \
+             firewalldservicesdir=%{firewalldservicesdir} \
              DESTDIR=%{?buildroot}
 
 
@@ -81,6 +89,7 @@ exit 0
 %systemd_post axiagpr.service
 %systemd_post axiaadvd.service
 %systemd_post axialwrd.service
+%firewalld_reload
 
 
 %preun
@@ -102,9 +111,13 @@ exit 0
 %{_sysconfdir}/modules-load.d/snd-axia.conf
 %{_sysconfdir}/modprobe.d/snd-axia.conf
 %{udevdir}/*
+%{firewallddir}/*
 
 
 %changelog
+* Sat Nov 18 2017 Christian Affolter <c.affolter@purplehaze.ch> - 0.3.0-1
+- Include firewalld services
+
 * Fri Sep 22 2017 Christian Affolter <c.affolter@purplehaze.ch> - 0.2.1-1
 - systemd: Start all services after network-online.target.
 
