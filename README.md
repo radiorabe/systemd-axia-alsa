@@ -264,6 +264,7 @@ AXIAADVD_OPTS="-if eth1"
 ## Troubleshooting
 The following commands might help on debugging.
 
+### Systemd service units status
 Systemd service units status:
 ```bash
 systemctl status axialwrd.service
@@ -272,9 +273,11 @@ systemctl status axiagpr.service
 systemctl status sys-module-snd_axia.device
 ```
 
+### snd_axia kernel module
 Check that [the kernel module has been loaded and the device node was
 created](#kernel-module-and-device-node).
 
+### udev status
 udev sysfs info:
 ```bash
 udevadm info /sys/module/snd_axia
@@ -332,6 +335,29 @@ udev helper script tests:
 
 # Remove the /dev/axia0 device node
 /usr/lib/udev/snd-axia.sh --rmnod
+```
+
+### Network status
+Network status and debugging:
+```bash
+# List socket binding
+ss -apn | grep -i axia
+
+# List socket bindings on legacy systems
+netstat -anp | grep axia
+
+# Firewall (if active)
+firewall-cmd --zone <ZONE> --list-all
+iptables -nvL
+
+# Display multicast group membership information for IPv4
+ip -4 maddr
+
+# Display multicast group membership information for IPv4 on legacy systems
+netstat -gn4
+
+# Package dump
+tcpdump -i <DEVICE> -nn -vvv 'net 239.0.0.0/8'
 ```
 
 ## License
