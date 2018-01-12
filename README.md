@@ -261,6 +261,13 @@ AXIALWRD_OPTS="-i eth1"
 AXIAADVD_OPTS="-if eth1"
 ```
 
+## Monitoring
+[Zabbix](https://www.zabbix.com/) users can import the
+[_Zabbix Axia ALSA Soundcard Driver for Livewire
+monitoring_ templates](https://github.com/radiorabe/rabe-zabbix/tree/master/app/Axia_ALSA_Soundcard_Driver_for_Livewire)
+in order to monitor the various components of the _Axia IP Audio
+Driver for Linux_.
+
 ## Troubleshooting
 The following commands might help on debugging.
 
