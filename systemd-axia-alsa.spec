@@ -1,8 +1,8 @@
 #
 # spec file for package systemd-axia-alsa
 #
-# Copyright (c) 2017 Radio Bern RaBe
-#                    http://www.rabe.ch
+# Copyright (c) 2017 - 2018 Radio Bern RaBe
+#                           http://www.rabe.ch
 #
 # This program is free software: you can redistribute it and/or
 # modify it under the terms of the GNU Affero General Public 
