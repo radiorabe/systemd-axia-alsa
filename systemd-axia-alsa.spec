@@ -1,8 +1,8 @@
 #
 # spec file for package systemd-axia-alsa
 #
-# Copyright (c) 2017 Radio Bern RaBe
-#                    http://www.rabe.ch
+# Copyright (c) 2017 - 2018 Radio Bern RaBe
+#                           http://www.rabe.ch
 #
 # This program is free software: you can redistribute it and/or
 # modify it under the terms of the GNU Affero General Public 
@@ -23,7 +23,7 @@
 #
 
 Name:           systemd-axia-alsa
-Version:        0.3.0
+Version:        0.3.1
 Release:        1%{?dist}
 Summary:        systemd service units and udev rules for AXIA - ALSA
 
@@ -37,7 +37,6 @@ BuildRequires:  systemd
 
 Requires:       axia-alsa
 Requires:       firewalld-filesystem
-Requires:       kmod-axia-alsa
 
 # udev directory paths
 # The _libdir macro can't be used as a prefix here as udev rules have to go
@@ -115,6 +114,9 @@ exit 0
 
 
 %changelog
+* Sat Oct 27 2018 Christian Affolter <c.affolter@purplehaze.ch> - 0.3.1-1
+- Removed kmod-axia-alsa dependency (is obsoleted by axia-alsa-1.2.2)
+
 * Sat Nov 18 2017 Christian Affolter <c.affolter@purplehaze.ch> - 0.3.0-1
 - Include firewalld services
 
